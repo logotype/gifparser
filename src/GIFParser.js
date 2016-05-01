@@ -1,8 +1,9 @@
 const ArrayBufferView = require('./ArrayBufferView');
 const Header = require('./blocks/Header');
 const LogicalScreenDescriptor = require('./blocks/LogicalScreenDescriptor');
-const GraphicsControlExtension = require('./blocks/GraphicsControlExtension');
 const GlobalColorTable = require('./blocks/GlobalColorTable');
+
+const GraphicsControlExtension = require('./extensions/GraphicsControlExtension');
 
 class GIFParser extends ArrayBufferView {
 
@@ -13,21 +14,6 @@ class GIFParser extends ArrayBufferView {
         this.graphicsControlExtension = new GraphicsControlExtension();
         this.logicalScreenDescriptor = new LogicalScreenDescriptor();
         this.globalColorTable = new GlobalColorTable();
-    }
-
-    parseBlock(length, type) {
-        let result = null;
-
-        switch(type) {
-            case UINT8:
-                result = this.dataView.getUint8(this.cursor.counter);
-                break;
-
-            default:
-                break;
-        }
-        this.cursor.counter += length;
-        return result;
     }
 
     _parse() {

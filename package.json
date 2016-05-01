@@ -1,0 +1,26 @@
+{
+  "name": "gifparser",
+  "version": "0.1.0",
+  "description": "GIF89a parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/logotype/gifparser.git"
+  },
+  "keywords": [
+    "GIF",
+    "GIF89a",
+    "Graphics",
+    "Interchange",
+    "Format"
+  ],
+  "author": "Victor Norgren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/logotype/gifparser/issues"
+  },
+  "homepage": "https://github.com/logotype/gifparser#readme"
+}

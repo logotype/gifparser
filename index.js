@@ -9,7 +9,7 @@
 //     console.log((rd === ab).toString().toUpperCase() + ' rd: ' + rd + ' ab: ' + ab);
 // }
 
-const GIFParser = require('./src/GIFParser');
+const GIFParser = require('./build/gifparser');
 
 function readFile(file) {
     let fs = require('fs'),

@@ -1,9 +1,9 @@
-const ArrayBufferView = require('./ArrayBufferView');
-const Header = require('./blocks/Header');
-const LogicalScreenDescriptor = require('./blocks/LogicalScreenDescriptor');
-const GlobalColorTable = require('./blocks/GlobalColorTable');
+import ArrayBufferView from './ArrayBufferView';
+import Header from './blocks/Header';
+import LogicalScreenDescriptor from './blocks/LogicalScreenDescriptor';
+import GlobalColorTable from './blocks/GlobalColorTable';
 
-const GraphicsControlExtension = require('./extensions/GraphicsControlExtension');
+import GraphicsControlExtension from './extensions/GraphicsControlExtension';
 
 class GIFParser extends ArrayBufferView {
 

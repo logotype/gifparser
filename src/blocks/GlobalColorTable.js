@@ -1,4 +1,4 @@
-const ArrayBufferView = require('./../ArrayBufferView');
+import ArrayBufferView from './../ArrayBufferView';
 
 class GlobalColorTable extends ArrayBufferView {
 

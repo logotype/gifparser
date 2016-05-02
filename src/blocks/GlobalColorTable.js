@@ -11,11 +11,11 @@ class GlobalColorTable extends ArrayBufferView {
     }
 
     _parse() {
-        let colors = [],
-            colorIndex = 0;
+        const colors = [];
+        let colorIndex = 0;
 
         for(let i = this.cursor.counter; i < (this.cursor.counter + this.byteLength); i += 3) {
-            let intR = this.dataView.getUint8(i),
+            const intR = this.dataView.getUint8(i),
                 intG = this.dataView.getUint8(i + 1),
                 intB = this.dataView.getUint8(i + 2),
                 hex = `#${this._getHex(intR)}${this._getHex(intG)}${this._getHex(intB)}`;

@@ -23,7 +23,7 @@ class BinaryUtils {
     }
 
     _getHex(component) {
-        let hex = component.toString(16);
+        const hex = component.toString(16);
         return (hex.length === 1 ? `0${hex}` : `${hex}`).toUpperCase();
     }
 
@@ -32,7 +32,7 @@ class BinaryUtils {
     }
 
     _getUint16(length = 0, littleEndian = true) {
-        let result = this.dataView.getUint16(this.cursor.counter, littleEndian);
+        const result = this.dataView.getUint16(this.cursor.counter, littleEndian);
         this._addCounter(length);
         return result;
     }

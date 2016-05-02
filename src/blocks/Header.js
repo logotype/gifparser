@@ -11,11 +11,11 @@ class GraphicsControlExtension extends ArrayBufferView {
 
     _parse() {
 
-        let signature,
-            version,
-            isValid,
-            width,
-            height;
+        let signature = null,
+            version = null,
+            isValid = null,
+            width = null,
+            height = null;
 
         signature = String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8());
         version = String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8());
@@ -31,7 +31,7 @@ class GraphicsControlExtension extends ArrayBufferView {
             version: version,
             width: width,
             height: height
-        }
+        };
     }
 
 }

@@ -4,6 +4,7 @@
   "description": "GIF89a parser",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint *.babel.js src test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/logotype/gifparser/issues"
   },
-  "homepage": "https://github.com/logotype/gifparser#readme"
+  "homepage": "https://github.com/logotype/gifparser#readme",
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.9.0"
+  }
 }

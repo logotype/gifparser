@@ -17,11 +17,11 @@ class GIFParser extends ArrayBufferView {
     }
 
     _parse() {
-        let headerData,
-            logicalScreenDescriptorData,
-            globalColorTableData,
-            backgroundColorIndex,
-            aspectRatio;
+        let headerData = null,
+            logicalScreenDescriptorData = null,
+            globalColorTableData = null,
+            backgroundColorIndex = null,
+            aspectRatio = null;
 
         headerData = this.header.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
         logicalScreenDescriptorData = this.logicalScreenDescriptor.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
@@ -36,10 +36,10 @@ class GIFParser extends ArrayBufferView {
         console.log(`version: ${headerData.version}`);
         console.log(`width: ${headerData.width} pixels`);
         console.log(`height: ${headerData.height} pixels`);
-        console.log(`logical screen descriptor: `, logicalScreenDescriptorData);
+        console.log('logical screen descriptor: ', logicalScreenDescriptorData);
         console.log(`bkg color index: ${backgroundColorIndex}`);
         console.log(`aspect ratio: ${aspectRatio}`);
-        console.log(`color table: `, globalColorTableData);
+        console.log('color table: ', globalColorTableData);
 
         while (this.cursor.counter < this.dataView.byteLength) {
 

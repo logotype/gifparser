@@ -95,7 +95,7 @@ class GIFParser extends ArrayBufferView {
         }
 
 
-        console.log(`-----------------------------------------------`);
+        console.log('-----------------------------------------------');
     }
 }
 

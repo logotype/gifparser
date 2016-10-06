@@ -1,4 +1,4 @@
-'use strict';
+const fs = require('fs');
 
 // for(var i = 0; i < rawData.length; i++) {
 //     compareAtCursor(i);
@@ -9,13 +9,13 @@
 //     console.log((rd === ab).toString().toUpperCase() + ' rd: ' + rd + ' ab: ' + ab);
 // }
 
-const GIFParser = require('./build/gifparser');
+const GIFParser = require('./build/gifparser').default;
 
 function readFile(file) {
-    let fs = require('fs'),
-        readStream = fs.createReadStream(file),
-        arrayBuffer = null,
-        parser = new GIFParser();
+    const readStream = fs.createReadStream(file);
+    const parser = new GIFParser();
+
+    let arrayBuffer = null;
 
     readStream
         .on('data', (chunk) => {
@@ -46,3 +46,4 @@ readFile('./samples/adaptive_pattern_transp_noisetransp_colors16.gif');
 readFile('./samples/win.gif');
 readFile('./samples/128x64.gif');
 readFile('./samples/rgb3x1.gif');
+readFile('./samples/comment.gif');

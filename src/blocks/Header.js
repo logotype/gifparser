@@ -1,6 +1,6 @@
 import ArrayBufferView from './../ArrayBufferView';
 
-class GraphicsControlExtension extends ArrayBufferView {
+export default class GraphicsControlExtension extends ArrayBufferView {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
@@ -35,5 +35,3 @@ class GraphicsControlExtension extends ArrayBufferView {
     }
 
 }
-
-module.exports = GraphicsControlExtension;

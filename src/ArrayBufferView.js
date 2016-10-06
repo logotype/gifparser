@@ -1,4 +1,4 @@
-class BinaryUtils {
+export default class ArrayBufferView {
 
     constructor() {
         this.cursor = {
@@ -45,5 +45,3 @@ class BinaryUtils {
         throw new Error('_parse has to be overridden!');
     }
 }
-
-module.exports = BinaryUtils;

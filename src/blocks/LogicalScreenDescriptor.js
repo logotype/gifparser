@@ -2,7 +2,7 @@ import ArrayBufferView from './../ArrayBufferView';
 
 const DEBUG_BITS = true;
 
-class LogicalScreenDescriptor extends ArrayBufferView {
+export default class LogicalScreenDescriptor extends ArrayBufferView {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
@@ -43,8 +43,8 @@ class LogicalScreenDescriptor extends ArrayBufferView {
         const bitsPerPixel = Math.pow(2, colorResolutionBits + 1);
 
         return {
-            globalColorTable: bitArray[7] ? true : false,
-            globalColorTableSorting: bitArray[3] ? true : false,
+            globalColorTable: bitArray[7],
+            globalColorTableSorting: bitArray[3],
             globalColorTableSize: `${globalColorTableSize} colors (0b${bitArray[2]}${bitArray[1]}${bitArray[0]}, bit-size ${globalColorTableSizeBits})`,
             globalColorTableBytes: globalColorTableBytes,
             colorResolution: `${bitsPerPixel} bits/pixel (0b${bitArray[6]}${bitArray[5]}${bitArray[4]}, bit-size ${colorResolutionBits})`
@@ -52,5 +52,3 @@ class LogicalScreenDescriptor extends ArrayBufferView {
     }
 
 }
-
-module.exports = LogicalScreenDescriptor;

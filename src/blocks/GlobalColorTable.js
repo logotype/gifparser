@@ -1,6 +1,6 @@
 import ArrayBufferView from './../ArrayBufferView';
 
-class GlobalColorTable extends ArrayBufferView {
+export default class GlobalColorTable extends ArrayBufferView {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView, byteLength) {
         this.arrayBuffer = arrayBuffer;
@@ -28,5 +28,3 @@ class GlobalColorTable extends ArrayBufferView {
     }
 
 }
-
-module.exports = GlobalColorTable;

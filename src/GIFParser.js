@@ -2,31 +2,27 @@ import ArrayBufferView from './ArrayBufferView';
 import Header from './blocks/Header';
 import LogicalScreenDescriptor from './blocks/LogicalScreenDescriptor';
 import GlobalColorTable from './blocks/GlobalColorTable';
-
 import GraphicsControlExtension from './extensions/GraphicsControlExtension';
+import CommentExtension from './extensions/CommentExtension';
 
-class GIFParser extends ArrayBufferView {
+export default class GIFParser extends ArrayBufferView {
 
     constructor() {
         super();
         this.colorTable = [];
         this.header = new Header();
         this.graphicsControlExtension = new GraphicsControlExtension();
+        this.commentExtension = new CommentExtension();
         this.logicalScreenDescriptor = new LogicalScreenDescriptor();
         this.globalColorTable = new GlobalColorTable();
     }
 
     _parse() {
-        let headerData = null,
-            logicalScreenDescriptorData = null,
-            globalColorTableData = null,
-            backgroundColorIndex = null,
-            aspectRatio = null;
-
-        headerData = this.header.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
-        logicalScreenDescriptorData = this.logicalScreenDescriptor.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
-        backgroundColorIndex = this._getUint8(1);
-        aspectRatio = this._getUint8(0);
+        const headerData = this.header.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
+        const logicalScreenDescriptorData = this.logicalScreenDescriptor.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
+        const backgroundColorIndex = this._getUint8(1);
+        const aspectRatio = this._getUint8(0);
+        let globalColorTableData = null;
 
         if(logicalScreenDescriptorData.globalColorTable) {
             globalColorTableData = this.globalColorTable.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView, logicalScreenDescriptorData.globalColorTableBytes);
@@ -50,7 +46,7 @@ class GIFParser extends ArrayBufferView {
 
                     switch(this._peek(1)) {
                         case 0xF9: {
-                            console.log('     0xf9 Graphics Control Extension');
+                            console.log('     0xF9 Graphics Control Extension');
                             this.graphicsControlExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
                             break;
                         }
@@ -61,17 +57,18 @@ class GIFParser extends ArrayBufferView {
                         }
 
                         case 0xFF: {
-                            console.log('     0x01 Application Extension');
+                            console.log('     0xFF Application Extension');
                             break;
                         }
 
                         case 0xFE: {
-                            console.log('     0x01 Comment Extension');
+                            console.log('     0xFE Comment Extension');
+                            this.commentExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
                             break;
                         }
 
                         default: {
-                            // console.log('     0x', this._peek(1).toString(16));
+                            console.log('     0x', this._peek(1).toString(16));
                             break;
                         }
                     }
@@ -79,24 +76,21 @@ class GIFParser extends ArrayBufferView {
                     break;
                 }
 
-                case 0x3b: {
-                    console.log('0x3b Trailer');
+                case 0x3B: {
+                    console.log('0x3B Trailer');
 
                     break;
                 }
 
                 default: {
-                    // console.log('NO DATA FOUND');
                     break;
                 }
             }
 
-            this._addCounter(1);
+            this._addCounter();
         }
 
 
         console.log('-----------------------------------------------');
     }
 }
-
-module.exports = GIFParser;

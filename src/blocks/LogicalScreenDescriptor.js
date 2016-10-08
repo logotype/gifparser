@@ -1,6 +1,6 @@
 import ArrayBufferView from './../ArrayBufferView';
 
-const DEBUG_BITS = true;
+const DEBUG_BITS = false;
 
 export default class LogicalScreenDescriptor extends ArrayBufferView {
 

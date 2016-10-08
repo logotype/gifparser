@@ -4,7 +4,7 @@
   "description": "GIF89a parser",
   "main": "index.js",
   "scripts": {
-    "index": "rimraf build && webpack -p && node index.js",
+    "index": "babel-node index.js",
     "build": "rimraf build && webpack -p",
     "lint": "eslint *.babel.js src test",
     "test": "echo \"Error: no test specified\" && exit 1"

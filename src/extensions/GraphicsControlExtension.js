@@ -15,10 +15,10 @@ export default class GraphicsControlExtension extends ArrayBufferView {
 
     _parse() {
         if(!this._validateBlock()) {
-            throw new Error('wrong GCE');
+            throw new Error('wrong Graphics Control Extension');
         }
 
-        console.log('     -> GCE is valid');
+        console.log('     -> VALID Graphics Control Extension');
     }
 
 }

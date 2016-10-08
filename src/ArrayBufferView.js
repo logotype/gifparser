@@ -37,6 +37,14 @@ export default class ArrayBufferView {
         return result;
     }
 
+    _getASCII(length = 1) {
+        let ascii = '';
+        for(let i = 0; i < length; i++) {
+            ascii += String.fromCharCode(this._getUint8(0));
+        }
+        return ascii;
+    }
+
     _peek(offset = 0) {
         return this.dataView.getUint8(this.cursor.counter + offset);
     }

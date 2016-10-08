@@ -45,7 +45,6 @@ export default class GraphicsControlExtension extends ArrayBufferView {
             const loops = this._getUint8(1);
             console.log(`          -> Loop Count (2 bytes): ${loops}`);
         } else if(application === 'XMP Data' && version === 'XMP') {
-            // Application specific.. photoshop/XMP data...
             let data = '';
             for(let i = 0; i < subBlockDataSize; i++) {
                 if(this._peek(0) === 0x00) {
@@ -66,14 +65,12 @@ export default class GraphicsControlExtension extends ArrayBufferView {
                 data += String.fromCharCode(this._getUint8(0));
             }
 
-            console.log(`          -> Unknown Application Data: ${data}`);
+            console.log(`          -> Data: ${data}`);
         }
 
         if(this._peek(0) !== 0x00) {
             throw new Error('Missing Application Extension Terminator');
         }
-
-        console.log('     -> VALID Application Extension');
     }
 
 }

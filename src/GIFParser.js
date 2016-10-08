@@ -84,8 +84,13 @@ export default class GIFParser extends ArrayBufferView {
                             break;
                         }
 
+                        case GIFParser.IMAGE_DESCRIPTOR: {
+                            console.log('     0x2C Image Descriptor');
+                            break;
+                        }
+
                         default: {
-                            // console.log('     0x', this._peek(1).toString(16));
+                            console.log(`     0x${this._peek(1).toString(16).toUpperCase()}`);
                             break;
                         }
                     }

@@ -18,8 +18,11 @@ export default class CommentExtension extends ArrayBufferView {
             throw new Error('wrong Comment Extension');
         }
 
-        // Skip 0x21, 0xFF
-        this._addCounter(1);
+        const extensionLabel = this._getUint8(0);
+        console.log(`     -> Extension Label: 0x${extensionLabel.toString(16)}`);
+
+        const applicationExtensionLabel = this._getUint8(0);
+        console.log(`     -> Comment Extension Label: 0x${applicationExtensionLabel.toString(16)}`);
 
         const length = this._getUint8(0);
         console.log(`     -> Length: ${length} bytes`);
@@ -29,13 +32,11 @@ export default class CommentExtension extends ArrayBufferView {
             comment += String.fromCharCode(this._getUint8(0));
         }
 
-        // if(this._peek(0) !== 0x00) {
-        //     throw new Error('Missing Comment Extension Sub-Block Terminator');
-        // }
+        if(this._peek(0) !== 0x00) {
+            throw new Error('Missing Comment Extension Sub-Block Terminator');
+        }
 
         console.log(`     -> Data: ${comment}`);
-
-        console.log('     -> VALID Comment Extension');
     }
 
 }

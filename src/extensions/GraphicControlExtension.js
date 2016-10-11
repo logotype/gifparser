@@ -53,7 +53,6 @@ export default class GraphicControlExtension extends ArrayBufferView {
         const delayTime = this._getUint8(0);
         console.log(`     -> Delay Time: ${delayTime} hundredths of a second (${delayTime * 10} ms per frame)`);
 
-        // TODO: check what this byte does
         this._addCounter(0);
 
         const transparentColorIndex = this._getUint8(0);

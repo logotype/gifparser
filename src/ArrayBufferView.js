@@ -14,7 +14,7 @@ export default class ArrayBufferView {
     }
 
     _addCounter(additional = 0) {
-        console.log(`[Byte ${this.cursor.counter}]`);
+        // console.log(`[Byte ${this.cursor.counter}]`);
         this.cursor.counter += additional;
         return this.cursor.counter++;
     }

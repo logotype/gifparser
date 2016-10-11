@@ -1,6 +1,6 @@
 import ArrayBufferView from './../ArrayBufferView';
 
-const DEBUG_BITS = false;
+const DEBUG_BITS = true;
 
 export default class LogicalScreenDescriptor extends ArrayBufferView {
 
@@ -12,7 +12,7 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
     }
 
     _parse() {
-        const byteRead = this.dataView.getUint16(this.cursor.counter, true),
+        const byteRead = this._getUint16(0, true),
             bitArray = new Uint8Array(8);
 
         bitArray[0] = this._getBit(byteRead, 0);
@@ -25,14 +25,14 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
         bitArray[7] = this._getBit(byteRead, 7);
 
         if(DEBUG_BITS) {
-            console.log(`${bitArray[0]} size of global color table`);
-            console.log(`${bitArray[1]} size of global color table`);
-            console.log(`${bitArray[2]} size of global color table`);
-            console.log(`${bitArray[3]} sort flag`);
-            console.log(`${bitArray[4]} color resolution`);
-            console.log(`${bitArray[5]} color resolution`);
-            console.log(`${bitArray[6]} color resolution`);
-            console.log(`${bitArray[7]} global color table flag`);
+            console.log(`  -> Bit Field: ${bitArray[0]} size of global color table`);
+            console.log(`  -> Bit Field: ${bitArray[1]} size of global color table`);
+            console.log(`  -> Bit Field: ${bitArray[2]} size of global color table`);
+            console.log(`  -> Bit Field: ${bitArray[3]} sort flag`);
+            console.log(`  -> Bit Field: ${bitArray[4]} color resolution`);
+            console.log(`  -> Bit Field: ${bitArray[5]} color resolution`);
+            console.log(`  -> Bit Field: ${bitArray[6]} color resolution`);
+            console.log(`  -> Bit Field: ${bitArray[7]} global color table flag`);
         }
 
         const globalColorTableSizeBits = (bitArray[0] ? 1 : 0 ) + (bitArray[1] ? 2 : 0 ) + (bitArray[2] ? 4 : 0 );
@@ -40,7 +40,7 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
         const globalColorTableBytes = 3 * globalColorTableSize;
 
         const colorResolutionBits = (bitArray[4] ? 1 : 0 ) + (bitArray[5] ? 2 : 0 ) + (bitArray[6] ? 4 : 0 );
-        const bitsPerPixel = Math.pow(2, colorResolutionBits + 1);
+        const bitsPerPixel = Math.min(Math.pow(2, colorResolutionBits + 1), 8);
 
         return {
             globalColorTable: bitArray[7],

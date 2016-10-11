@@ -1,27 +1,23 @@
+import chalk from 'chalk';
+
 import ArrayBufferView from './../ArrayBufferView';
 
-export default class GraphicsControlExtension extends ArrayBufferView {
+export default class GraphicControlExtension extends ArrayBufferView {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
         this.cursor = cursor;
         this.dataView = dataView;
-        this._parse();
-    }
-
-    _validateBlock() {
-        return this._peek(0) === 0x21 &&
-            this._peek(1) === 0xFF &&
-            this._peek(2) === 0x0B;
+        return this._parse();
     }
 
     _parse() {
-        if(!this._validateBlock()) {
-            throw new Error('Wrong Application Extension');
+        if(!this._validateBlock(0x21, 0xFF, 0x0B)) {
+            console.log(chalk.red('     -> Application Extension validation failed (block size should be 11)'));
         }
 
-        const extensionLabel = this._getUint8(0);
-        console.log(`     -> Extension Label: 0x${extensionLabel.toString(16)}`);
+        const extensionIntroducer = this._getUint8(0);
+        console.log(`     -> Extension Introducer: 0x${extensionIntroducer.toString(16)}`);
 
         const applicationExtensionLabel = this._getUint8(0);
         console.log(`     -> Application Extension Label: 0x${applicationExtensionLabel.toString(16)}`);
@@ -68,8 +64,11 @@ export default class GraphicsControlExtension extends ArrayBufferView {
             console.log(`          -> Data: ${data}`);
         }
 
-        if(this._peek(0) !== 0x00) {
-            throw new Error('Missing Application Extension Terminator');
+        const extensionTerminator = this._getUint8(0);
+        console.log(`     -> Extension Terminator: 0x${extensionTerminator.toString(16).toUpperCase()}`);
+
+        if(extensionTerminator !== 0x00) {
+            console.log(chalk.red('     -> Missing Application Extension Block Terminator'));
         }
     }
 

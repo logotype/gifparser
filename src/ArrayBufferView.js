@@ -14,6 +14,7 @@ export default class ArrayBufferView {
     }
 
     _addCounter(additional = 0) {
+        console.log(`[Byte ${this.cursor.counter}]`);
         this.cursor.counter += additional;
         return this.cursor.counter++;
     }
@@ -37,6 +38,12 @@ export default class ArrayBufferView {
         return result;
     }
 
+    _getInt16(length = 0, littleEndian = true) {
+        const result = this.dataView.getInt16(this.cursor.counter, littleEndian);
+        this._addCounter(length);
+        return result;
+    }
+
     _getASCII(length = 1) {
         let ascii = '';
         for(let i = 0; i < length; i++) {
@@ -47,6 +54,12 @@ export default class ArrayBufferView {
 
     _peek(offset = 0) {
         return this.dataView.getUint8(this.cursor.counter + offset);
+    }
+
+    _validateBlock(...values) {
+        return !values
+            .map((value, index) => this._peek(index) === value)
+            .some((valid) => valid === false);
     }
 
     _parse() {

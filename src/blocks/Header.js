@@ -1,6 +1,6 @@
 import ArrayBufferView from './../ArrayBufferView';
 
-export default class GraphicsControlExtension extends ArrayBufferView {
+export default class GraphicControlExtension extends ArrayBufferView {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
@@ -10,15 +10,12 @@ export default class GraphicsControlExtension extends ArrayBufferView {
     }
 
     _parse() {
+        const signature = this._getASCII(3),
+            version = this._getASCII(3);
 
-        let signature = null,
-            version = null,
-            isValid = null,
+        let isValid = null,
             width = null,
             height = null;
-
-        signature = String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8());
-        version = String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8()) + String.fromCharCode(this._getUint8());
 
         isValid = (signature === 'GIF' && (version === '87a' || version === '89a'));
 

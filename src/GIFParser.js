@@ -4,7 +4,7 @@ import Header from './blocks/Header';
 import ApplicationExtension from './extensions/ApplicationExtension';
 import CommentExtension from './extensions/CommentExtension';
 import GlobalColorTable from './blocks/GlobalColorTable';
-import GraphicsControlExtension from './extensions/GraphicsControlExtension';
+import GraphicControlExtension from './extensions/GraphicControlExtension';
 import LogicalScreenDescriptor from './blocks/LogicalScreenDescriptor';
 
 export default class GIFParser extends ArrayBufferView {
@@ -24,7 +24,7 @@ export default class GIFParser extends ArrayBufferView {
         this.colorTable = [];
         this.header = new Header();
         this.applicationExtension = new ApplicationExtension();
-        this.graphicsControlExtension = new GraphicsControlExtension();
+        this.GraphicControlExtension = new GraphicControlExtension();
         this.commentExtension = new CommentExtension();
         this.logicalScreenDescriptor = new LogicalScreenDescriptor();
         this.globalColorTable = new GlobalColorTable();
@@ -62,8 +62,8 @@ export default class GIFParser extends ArrayBufferView {
 
                     switch(this._peek(1)) {
                         case GIFParser.GRAPHIC_CONTROL_EXTENSION: {
-                            console.log('     0xF9 Graphics Control Extension');
-                            this.graphicsControlExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
+                            console.log('     0xF9 Graphic Control Extension');
+                            this.GraphicControlExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
                             break;
                         }
 

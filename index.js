@@ -47,7 +47,8 @@ function readFile(file) {
 // readFile('./samples/comment.gif');
 // readFile('./samples/comment2.gif');
 readFile('./samples/animated1.gif');
-readFile('./samples/animated1_100ms.gif');
-readFile('./samples/animated1_1000ms.gif');
-readFile('./samples/animated2.gif');
-readFile('./samples/animated3.gif');
+// readFile('./samples/animated1_100ms.gif');
+// readFile('./samples/animated1_1000ms.gif');
+// readFile('./samples/animated2.gif');
+// readFile('./samples/animated3.gif');
+// readFile('./samples/animated4.gif');

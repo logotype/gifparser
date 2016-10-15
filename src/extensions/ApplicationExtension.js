@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 
-import ArrayBufferView from './../ArrayBufferView';
+import BaseExtension from './BaseExtension';
 
-export default class GraphicControlExtension extends ArrayBufferView {
+export default class GraphicControlExtension extends BaseExtension {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
@@ -16,11 +16,8 @@ export default class GraphicControlExtension extends ArrayBufferView {
             console.log(chalk.red('     -> Application Extension validation failed (block size should be 11)'));
         }
 
-        const extensionIntroducer = this._getUint8(0);
-        console.log(`     -> Extension Introducer: 0x${extensionIntroducer.toString(16)}`);
-
-        const applicationExtensionLabel = this._getUint8(0);
-        console.log(`     -> Application Extension Label: 0x${applicationExtensionLabel.toString(16)}`);
+        console.log(`     -> Extension Introducer: 0x${this.extensionIntroducer.toString(16)}`);
+        console.log(`     -> Extension Label: 0x${this.extensionLabel.toString(16)} (Application Extension)`);
 
         const blockSize = this._getUint8(0);
         console.log(`     -> Block Size: ${blockSize} bytes`);

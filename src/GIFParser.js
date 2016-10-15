@@ -1,8 +1,8 @@
 import ArrayBufferView from './ArrayBufferView';
 import Header from './blocks/Header';
-
 import ApplicationExtension from './extensions/ApplicationExtension';
 import CommentExtension from './extensions/CommentExtension';
+import PlainTextExtension from './extensions/PlainTextExtension';
 import GlobalColorTable from './blocks/GlobalColorTable';
 import GraphicControlExtension from './extensions/GraphicControlExtension';
 import LogicalScreenDescriptor from './blocks/LogicalScreenDescriptor';
@@ -24,8 +24,9 @@ export default class GIFParser extends ArrayBufferView {
         this.colorTable = [];
         this.header = new Header();
         this.applicationExtension = new ApplicationExtension();
-        this.GraphicControlExtension = new GraphicControlExtension();
+        this.graphicControlExtension = new GraphicControlExtension();
         this.commentExtension = new CommentExtension();
+        this.plainTextExtension = new PlainTextExtension();
         this.logicalScreenDescriptor = new LogicalScreenDescriptor();
         this.globalColorTable = new GlobalColorTable();
     }
@@ -63,12 +64,13 @@ export default class GIFParser extends ArrayBufferView {
                     switch(this._peek(1)) {
                         case GIFParser.GRAPHIC_CONTROL_EXTENSION: {
                             console.log('     0xF9 Graphic Control Extension');
-                            this.GraphicControlExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
+                            this.graphicControlExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
                             break;
                         }
 
                         case GIFParser.PLAINTEXT_EXTENSION: {
                             console.log('     0x01 Plain Text Extension');
+                            this.plainTextExtension.parseFromArrayBuffer(this.arrayBuffer, this.cursor, this.dataView);
                             break;
                         }
 

@@ -40,7 +40,7 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
         const globalColorTableBytes = 3 * globalColorTableSize;
 
         const colorResolutionBits = (bitArray[4] ? 1 : 0 ) + (bitArray[5] ? 2 : 0 ) + (bitArray[6] ? 4 : 0 );
-        const bitsPerPixel = Math.min(Math.pow(2, colorResolutionBits + 1), 8);
+        const bitsPerPixel = globalColorTableSizeBits + 1;
 
         return {
             globalColorTable: bitArray[7],
@@ -50,5 +50,4 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
             colorResolution: `${bitsPerPixel} bits/pixel (0b${bitArray[6]}${bitArray[5]}${bitArray[4]}, bit-size ${colorResolutionBits})`
         };
     }
-
 }

@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 
-import ArrayBufferView from './../ArrayBufferView';
+import BaseExtension from './BaseExtension';
 
-export default class CommentExtension extends ArrayBufferView {
+export default class CommentExtension extends BaseExtension {
 
     parseFromArrayBuffer(arrayBuffer, cursor, dataView) {
         this.arrayBuffer = arrayBuffer;
@@ -16,17 +16,14 @@ export default class CommentExtension extends ArrayBufferView {
             console.log(chalk.red('>>>>>>>>>>>>>> ERROR IN Comment Extension'));
         }
 
-        const extensionIntroducer = this._getUint8(0);
-        console.log(`     -> Extension Introducer: 0x${extensionIntroducer.toString(16)}`);
+        console.log(`     -> Extension Introducer: 0x${this.extensionIntroducer.toString(16)}`);
+        console.log(`     -> Extension Label: 0x${this.extensionLabel.toString(16)} (Comment Extension)`);
 
-        const applicationExtensionLabel = this._getUint8(0);
-        console.log(`     -> Comment Extension Label: 0x${applicationExtensionLabel.toString(16)}`);
-
-        const length = this._getUint8(0);
-        console.log(`     -> Length: ${length} bytes`);
+        const blockSize = this._getUint8(0);
+        console.log(`     -> Block Size: ${blockSize} bytes`);
 
         let comment = '';
-        for(let i = 0; i < length; i++) {
+        for(let i = 0; i < blockSize; i++) {
             comment += String.fromCharCode(this._getUint8(0));
         }
         console.log(`     -> Data: ${comment}`);

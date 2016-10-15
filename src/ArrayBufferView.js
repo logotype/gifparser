@@ -56,7 +56,7 @@ export default class ArrayBufferView {
         return this.dataView.getUint8(this.cursor.counter + offset);
     }
 
-    _validateBlock(...values) {
+    _validateBlock(values) {
         return !values
             .map((value, index) => this._peek(index) === value)
             .some((valid) => valid === false);

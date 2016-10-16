@@ -1,6 +1,6 @@
 {
   "name": "gifparser",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "GIF89a parser",
   "main": "index.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "mocha": "^3.1.2",
     "rimraf": "^2.5.4",
     "webpack": "^1.13.2",
-    "yargs": "^6.0.0"
+    "yargs": "^6.1.1"
   },
   "dependencies": {
     "chalk": "^1.1.3"

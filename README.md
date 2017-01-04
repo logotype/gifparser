@@ -44,7 +44,7 @@ Authors
 Copyright and license
 ---------------------
 
-Copyright © 2016 logotype
+Copyright © 2017 logotype
 
 Author: Victor Norgren
 

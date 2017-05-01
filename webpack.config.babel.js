@@ -1,3 +1,5 @@
+import path from 'path';
+
 import webpack from 'webpack';
 import yargs from 'yargs';
 
@@ -9,14 +11,14 @@ export default {
         'gifparser': './src/GIFParser.js'
     },
     output: {
-        path: './build',
+        path: path.join(__dirname, '/build'),
         filename: '[name].js',
         library: 'gifparser',
         libraryTarget: 'umd'
     },
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
         ]
     },
     externals: [],

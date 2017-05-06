@@ -8,9 +8,12 @@ export default class ArrayBufferView {
     }
 
     parseFromArrayBuffer(arrayBuffer) {
+        if(!arrayBuffer || !(arrayBuffer instanceof ArrayBuffer)) {
+            throw new Error('No ArrayBuffer specified!');
+        }
         this.arrayBuffer = arrayBuffer;
         this.dataView = new DataView(this.arrayBuffer);
-        this._parse();
+        return this._parse();
     }
 
     _addCounter(additional = 0) {

@@ -13,30 +13,30 @@ export default class GraphicControlExtension extends BaseExtension {
 
     _parse() {
         if(!this._validateBlock(0x21, 0xFF, 0x0B)) {
-            console.log(chalk.red('     -> Application Extension validation failed (block size should be 11)'));
+            //console.log(chalk.red('     -> Application Extension validation failed (block size should be 11)'));
         }
 
-        console.log(`     -> Extension Introducer: 0x${this.extensionIntroducer.toString(16)}`);
-        console.log(`     -> Extension Label: 0x${this.extensionLabel.toString(16)} (Application Extension)`);
+        //console.log(`     -> Extension Introducer: 0x${this.extensionIntroducer.toString(16)}`);
+        //console.log(`     -> Extension Label: 0x${this.extensionLabel.toString(16)} (Application Extension)`);
 
         const blockSize = this._getUint8(0);
-        console.log(`     -> Block Size: ${blockSize} bytes`);
+        //console.log(`     -> Block Size: ${blockSize} bytes`);
 
         const application = this._getASCII(8);
-        console.log(`     -> Application Identifier (8 bytes): ${application}`);
+        //console.log(`     -> Application Identifier (8 bytes): ${application}`);
 
         const version = this._getASCII(3);
-        console.log(`     -> Application Authentication Code (3 bytes): ${version}`);
+        //console.log(`     -> Application Authentication Code (3 bytes): ${version}`);
 
         const subBlockDataSize = this._getUint8(0);
-        console.log(`          -> Sub-block Data Size: ${subBlockDataSize}`);
+        //console.log(`          -> Sub-block Data Size: ${subBlockDataSize}`);
 
         if(application === 'NETSCAPE' && version === '2.0') {
             const subBlockID = this._getUint8(0);
-            console.log(`          -> Sub-block ID: ${subBlockID}`);
+            //console.log(`          -> Sub-block ID: ${subBlockID}`);
 
             const loops = this._getUint8(1);
-            console.log(`          -> Loop Count (2 bytes): ${loops}`);
+            //console.log(`          -> Loop Count (2 bytes): ${loops}`);
         } else if(application === 'XMP Data' && version === 'XMP') {
             let data = '';
             for(let i = 0; i < subBlockDataSize; i++) {
@@ -47,7 +47,7 @@ export default class GraphicControlExtension extends BaseExtension {
                 data += String.fromCharCode(this._getUint8(0));
             }
 
-            console.log(`          -> XMP Data: ${data}`);
+            //console.log(`          -> XMP Data: ${data}`);
         } else {
             let data = '';
             for(let i = 0; i < subBlockDataSize; i++) {
@@ -58,14 +58,14 @@ export default class GraphicControlExtension extends BaseExtension {
                 data += String.fromCharCode(this._getUint8(0));
             }
 
-            console.log(`          -> Data: ${data}`);
+            //console.log(`          -> Data: ${data}`);
         }
 
         const extensionTerminator = this._getUint8(0);
-        console.log(`     -> Extension Terminator: 0x${extensionTerminator.toString(16).toUpperCase()}`);
+        //console.log(`     -> Extension Terminator: 0x${extensionTerminator.toString(16).toUpperCase()}`);
 
         if(extensionTerminator !== 0x00) {
-            console.log(chalk.red('     -> Missing Application Extension Block Terminator'));
+            //console.log(chalk.red('     -> Missing Application Extension Block Terminator'));
         }
     }
 

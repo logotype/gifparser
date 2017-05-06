@@ -25,14 +25,14 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
         bitArray[7] = this._getBit(byteRead, 7);
 
         if(DEBUG_BITS) {
-            console.log(`  -> Bit Field: ${bitArray[0]} size of global color table`);
-            console.log(`  -> Bit Field: ${bitArray[1]} size of global color table`);
-            console.log(`  -> Bit Field: ${bitArray[2]} size of global color table`);
-            console.log(`  -> Bit Field: ${bitArray[3]} sort flag`);
-            console.log(`  -> Bit Field: ${bitArray[4]} color resolution`);
-            console.log(`  -> Bit Field: ${bitArray[5]} color resolution`);
-            console.log(`  -> Bit Field: ${bitArray[6]} color resolution`);
-            console.log(`  -> Bit Field: ${bitArray[7]} global color table flag`);
+            //console.log(`  -> Bit Field: ${bitArray[0]} size of global color table`);
+            //console.log(`  -> Bit Field: ${bitArray[1]} size of global color table`);
+            //console.log(`  -> Bit Field: ${bitArray[2]} size of global color table`);
+            //console.log(`  -> Bit Field: ${bitArray[3]} sort flag`);
+            //console.log(`  -> Bit Field: ${bitArray[4]} color resolution`);
+            //console.log(`  -> Bit Field: ${bitArray[5]} color resolution`);
+            //console.log(`  -> Bit Field: ${bitArray[6]} color resolution`);
+            //console.log(`  -> Bit Field: ${bitArray[7]} global color table flag`);
         }
 
         const globalColorTableSizeBits = (bitArray[0] ? 1 : 0 ) + (bitArray[1] ? 2 : 0 ) + (bitArray[2] ? 4 : 0 );
@@ -45,9 +45,11 @@ export default class LogicalScreenDescriptor extends ArrayBufferView {
         return {
             globalColorTable: bitArray[7],
             globalColorTableSorting: bitArray[3],
-            globalColorTableSize: `${globalColorTableSize} colors (0b${bitArray[2]}${bitArray[1]}${bitArray[0]}, bit-size ${globalColorTableSizeBits})`,
+            globalColorTableSize: globalColorTableSize,
+            globalColorTableSizeDescription: `${globalColorTableSize} colors (0b${bitArray[2]}${bitArray[1]}${bitArray[0]}, bit-size ${globalColorTableSizeBits})`,
             globalColorTableBytes: globalColorTableBytes,
-            colorResolution: `${bitsPerPixel} bits/pixel (0b${bitArray[6]}${bitArray[5]}${bitArray[4]}, bit-size ${colorResolutionBits})`
+            colorResolution: bitsPerPixel,
+            colorResolutionDescription: `${bitsPerPixel} bits/pixel (0b${bitArray[6]}${bitArray[5]}${bitArray[4]}, bit-size ${colorResolutionBits})`
         };
     }
 }

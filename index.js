@@ -23,7 +23,7 @@ function readFile(file) {
         })
         .on('end', () => {
             console.log('file: ', file);
-            parser.parseFromArrayBuffer(arrayBuffer);
+            console.log(parser.parseFromArrayBuffer(arrayBuffer));
         });
 }
 // readFile('./samples/colors2.gif');
@@ -45,8 +45,8 @@ function readFile(file) {
 // readFile('./samples/128x64.gif'); // works with GCE
 // readFile('./samples/rgb3x1.gif');
 // readFile('./samples/comment.gif');
-// readFile('./samples/comment2.gif');
-readFile('./samples/animated1.gif');
+readFile('./samples/comment2.gif');
+// readFile('./samples/animated1.gif');
 // readFile('./samples/animated1_100ms.gif');
 // readFile('./samples/animated1_1000ms.gif');
 // readFile('./samples/animated2.gif');

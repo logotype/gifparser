@@ -1,6 +1,6 @@
 {
   "name": "gifparser",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "GIF89a parser",
   "main": "build/gifparser.js",
   "scripts": {

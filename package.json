@@ -8,6 +8,8 @@
     "build": "rimraf build && webpack -p",
     "lint": "eslint *.babel.js src test",
     "test": "jest",
+    "prepublish": "npm run test && rimraf build && webpack -p",
+    "posttest": "npm run lint",
     "test-watch": "jest --watch"
   },
   "repository": {
@@ -29,20 +31,20 @@
   "homepage": "https://github.com/logotype/gifparser#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
+    "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
-    "babel-loader": "7.0.0",
+    "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.2.0",
     "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-import": "^2.7.0",
     "rimraf": "^2.6.1",
-    "webpack": "^2.6.1",
-    "yargs": "^8.0.1"
+    "webpack": "^3.2.0",
+    "yargs": "^8.0.2"
   },
   "dependencies": {
-    "chalk": "^1.1.3",
+    "chalk": "^2.0.1",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4"
   }
